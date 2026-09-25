@@ -193,6 +193,20 @@ MailWizz's own per-server hourly/daily/monthly quota fields are what should be
 set to match your CyberMail plan, since those limits change when you upgrade
 and the extension has no way to know your current plan from the API alone.
 
+### Known issue: some accounts get the wrong limits at signup
+
+CyberMail support confirmed a bug in their account provisioning (still open,
+no fix date given, as of this writing): if you land on the CyberMail email
+dashboard for the first time without going through their explicit signup
+form, your account can get linked to the Free plan without its real limits
+being copied over, leaving old defaults in place (1,000/month, 500/day,
+2/second instead of the correct 15,000/month, 500/day, 3/second).
+
+If `GET /email/v1/account/stats` shows numbers lower than your actual plan
+should give, this is that bug, not a documentation or extension error. It has
+to be fixed manually, per account, by CyberMail support — open a ticket with
+them, mention the mismatch, and they can correct it same day.
+
 ---
 
 ## Notes on the docs
